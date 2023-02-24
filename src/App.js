@@ -1,35 +1,15 @@
-import logoPath from './images/header-logo.svg';
+
+import avatarPath from './images/profile-avatar.jpeg';
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Main from "./components/Main";
 
 function App() {
   return (
     <body className="page">
-    <header className="header">
-      <img className="header__logo" src={logoPath} alt="логотип" />
-    </header>
-    <main className="content">
-      <section className="profile">
-        <div className="profile__block">
-          <div className="profile__avatar-edit">
-            <img className="profile__avatar" src="<%=require('./images/profile-avatar.jpeg')%>" alt="аватар" />
-              <button className="profile__avatar-button" type="button" aria-label="Обновить аватар"></button>
-          </div>
-          <div className="profile__info">
-            <h1 className="profile__title"></h1>
-            <button className="profile__edit-button hovered-link" type="button" aria-label="Редактировать"></button>
-            <p className="profile__subtitle"></p>
-          </div>
-        </div>
-        <button className="profile__add-button hovered-link" type="button" aria-label="Добавить"></button>
-      </section>
-      <section className="elements">
-        <ul className="elements__list">
-
-        </ul>
-      </section>
-    </main>
-    <footer className="footer">
-      <p className="footer__copyright">© 2022 Mesto Russia</p>
-    </footer>
+    <Header />
+    <Main />
+    <Footer />
 
     <div className="popup popup_type_edit">
       <div className="popup__container">
