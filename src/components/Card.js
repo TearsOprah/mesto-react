@@ -1,7 +1,12 @@
 export default function Card(props) {
+
+  function handleCardClick() {
+    props.onCardClick(props.card)
+  }
+
   return (
-    <li key={props.card._id} className="element">
-      <img className="element__image" src={props.card.link} alt="" />
+    <li key={props.card._id} className={"element"}>
+      <img onClick={handleCardClick} className="element__image" src={props.card.link} alt={props.card.name} />
       <div className="element__info">
         <h2 className="element__title">{props.card.name}</h2>
         <div>

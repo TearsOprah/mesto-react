@@ -19,15 +19,24 @@ function App() {
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true)
   }
+
+  function handleCardClick(card) {
+    setSelectedCard(card)
+    setIsImagePopupOpen(true)
+  }
   
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false)
     setIsAddPlacePopupOpen(false)
     setIsEditAvatarPopupOpen(false)
+    setIsImagePopupOpen(false)
+    setSelectedCard({})
   }
 
+  const [selectedCard, setSelectedCard] = useState({})
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
+  const [isImagePopupOpen, setIsImagePopupOpen] = useState(false)
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false)
 
   return (
@@ -37,7 +46,8 @@ function App() {
 
     <Main onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
-          onEditAvatar={handleEditAvatarClick} />
+          onEditAvatar={handleEditAvatarClick}
+          onCardClick={handleCardClick}/>
 
     <Footer />
 
@@ -104,22 +114,9 @@ function App() {
                      </>
                    )} />
 
-    <ImagePopup />
-
-
-    <template className="card-template">
-      <li className="element">
-        <img className="element__image" src="#" alt="" />
-          <div className="element__info">
-            <h2 className="element__title"></h2>
-            <div>
-              <button className="element__like" type="button"></button>
-              <p className="element__likes"></p>
-            </div>
-          </div>
-          <button className="element__delete" type="button"></button>
-      </li>
-    </template>
+    <ImagePopup card={selectedCard}
+                onClose={closeAllPopups}
+                isOpen={isImagePopupOpen}/>
 
     </body>
   );
