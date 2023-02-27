@@ -1,4 +1,3 @@
-import avatarPath from "../images/profile-avatar.jpeg";
 import {useEffect, useState} from "react";
 import api from "../utils/api";
 
@@ -7,6 +6,7 @@ export default function Main(props) {
   const [userName, setUserName] = useState('')
   const [userDescription, setUserDescription] = useState('')
   const [userAvatar, setUserAvatar] = useState('')
+  const [cards, setCards] = useState([])
 
   useEffect(() => {
     api.getUserData()
@@ -19,6 +19,18 @@ export default function Main(props) {
         console.log(err)
       })
   }, [])
+
+  useEffect(() => {
+    api.getInitialCards()
+      .then(res => {
+        console.log(res)
+        setCards(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
+
 
   return (
     <main className="content">
@@ -38,7 +50,19 @@ export default function Main(props) {
       </section>
       <section className="elements">
         <ul className="elements__list">
-
+          {cards.map(card => (
+            <li key={card._id} className="element">
+              <img className="element__image" src={card.link} alt="" />
+              <div className="element__info">
+                <h2 className="element__title">{card.name}</h2>
+                <div>
+                  <button className="element__like" type="button"></button>
+                  <p className="element__likes">{card.likes.length}</p>
+                </div>
+              </div>
+              <button className="element__delete" type="button"></button>
+            </li>
+          ))}
         </ul>
       </section>
     </main>
