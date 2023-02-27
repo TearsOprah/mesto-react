@@ -5,7 +5,7 @@ export default function Card(props) {
   }
 
   return (
-    <li key={props.card._id} className={"element"}>
+    <li className={"element"}>
       <img onClick={handleCardClick} className="element__image" src={props.card.link} alt={props.card.name} />
       <div className="element__info">
         <h2 className="element__title">{props.card.name}</h2>

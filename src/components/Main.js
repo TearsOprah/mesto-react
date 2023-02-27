@@ -24,7 +24,6 @@ export default function Main(props) {
   useEffect(() => {
     api.getInitialCards()
       .then(res => {
-        console.log(res)
         setCards(res)
       })
       .catch(err => {
@@ -53,6 +52,7 @@ export default function Main(props) {
         <ul className="elements__list">
           {cards.map(card => (
             <Card card={card}
+                  key={card._id}
                   onCardClick={props.onCardClick} />
           ))}
         </ul>

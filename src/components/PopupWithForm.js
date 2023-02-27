@@ -5,6 +5,7 @@ export default function PopupWithForm(props) {
         <form className="popup__form" name={`${props.name}-form`} noValidate>
           <h2 className="popup__title">{props.title}</h2>
           {props.children}
+          <input className="popup__save-button" type="submit" name="save" value={props.buttonText} />
         </form>
         <button onClick={props.onClose} className="popup__closer hovered-link popup__closer_type_edit" type="button"
                 aria-label="Закрыть"></button>
