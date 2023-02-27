@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import api from "../utils/api";
+import Card from "./Card";
 
 export default function Main(props) {
 
@@ -51,17 +52,7 @@ export default function Main(props) {
       <section className="elements">
         <ul className="elements__list">
           {cards.map(card => (
-            <li key={card._id} className="element">
-              <img className="element__image" src={card.link} alt="" />
-              <div className="element__info">
-                <h2 className="element__title">{card.name}</h2>
-                <div>
-                  <button className="element__like" type="button"></button>
-                  <p className="element__likes">{card.likes.length}</p>
-                </div>
-              </div>
-              <button className="element__delete" type="button"></button>
-            </li>
+            <Card card={card} />
           ))}
         </ul>
       </section>
