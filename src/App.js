@@ -26,15 +26,74 @@ function App() {
 
   return (
     <body className="page">
+
     <Header />
+
     <Main onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick} />
+
     <Footer />
-    <PopupWithForm isOpen={isEditProfilePopupOpen} name={'edit'} title={'Редактировать профиль'} children=''/>
-    <PopupWithForm isOpen={isAddPlacePopupOpen} name={'add'} title={'Новое место'} children='' />
-    <PopupWithForm isOpen={''} name={'delete'} title={'Вы уверены?'} children='' />
-    <PopupWithForm isOpen={isEditAvatarPopupOpen} name={'avatar'} title={'Обновить аватар'} children='' />
+
+    <PopupWithForm isOpen={isEditProfilePopupOpen}
+                   name={'edit'}
+                   title={'Редактировать профиль'}
+                   children={(
+                     <>
+                       <div className="popup__field-container">
+                         <input id="nameInput" className="popup__field" type="text" name="name" minLength="2" maxLength="40"
+                                placeholder="Введите имя" required />
+                         <span id="nameInput-error" className="popup__error"></span>
+                       </div>
+                       <div className="popup__field-container">
+                         <input id="jobInput" className="popup__field" type="text" name="job" minLength="2" maxLength="200"
+                                placeholder="Введите профессию" required />
+                         <span id="jobInput-error" className="popup__error"></span>
+                       </div>
+                       <input className="popup__save-button" type="submit" name="save" value="Сохранить" />
+                     </>
+                   )}/>
+
+    <PopupWithForm isOpen={isAddPlacePopupOpen}
+                   name={'add'}
+                   title={'Новое место'}
+                   children={(
+                     <>
+                       <div className="popup__field-container">
+                         <input id="cardNameInput" className="popup__field" type="text" name="name" minLength="2" maxLength="30"
+                                placeholder="Название" required />
+                         <span id="cardNameInput-error" className="popup__error popup__error_visible"></span>
+                       </div>
+                       <div className="popup__field-container">
+                         <input id="linkInput" className="popup__field" type="url" name="link" maxLength="1000"
+                                placeholder="Ссылка на картинку" required />
+                         <span id="linkInput-error" className="popup__error popup__error_visible"></span>
+                       </div>
+                       <input className="popup__save-button popup__save-button_invalid" type="submit" name="save" value="Создать" disabled />
+                     </>
+                   )} />
+
+    <PopupWithForm isOpen={''}
+                   name={'delete'}
+                   title={'Вы уверены?'}
+                   children={(
+                     <input className="popup__save-button" type="submit" name="delete" value="Да" />
+                   )} />
+
+    <PopupWithForm isOpen={isEditAvatarPopupOpen}
+                   name={'avatar'}
+                   title={'Обновить аватар'}
+                   children={(
+                     <>
+                       <div className="popup__field-container">
+                         <input id="avatarInput" className="popup__field" type="url" name="avatar" maxLength="1000"
+                                placeholder="Ссылка на картинку" required />
+                         <span id="avatarInput-error" className="popup__error popup__error_visible"></span>
+                       </div>
+                       <input className="popup__save-button" type="submit" name="save" value="Сохранить" />
+                     </>
+                   )} />
+
     <ImagePopup />
 
 
