@@ -19,6 +19,12 @@ function App() {
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true)
   }
+  
+  function closeAllPopups() {
+    setIsEditProfilePopupOpen(false)
+    setIsAddPlacePopupOpen(false)
+    setIsEditAvatarPopupOpen(false)
+  }
 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
@@ -36,6 +42,7 @@ function App() {
     <Footer />
 
     <PopupWithForm isOpen={isEditProfilePopupOpen}
+                   onClose={closeAllPopups}
                    name={'edit'}
                    title={'Редактировать профиль'}
                    children={(
@@ -55,6 +62,7 @@ function App() {
                    )}/>
 
     <PopupWithForm isOpen={isAddPlacePopupOpen}
+                   onClose={closeAllPopups}
                    name={'add'}
                    title={'Новое место'}
                    children={(
@@ -74,6 +82,7 @@ function App() {
                    )} />
 
     <PopupWithForm isOpen={''}
+                   onClose={closeAllPopups}
                    name={'delete'}
                    title={'Вы уверены?'}
                    children={(
@@ -81,6 +90,7 @@ function App() {
                    )} />
 
     <PopupWithForm isOpen={isEditAvatarPopupOpen}
+                   onClose={closeAllPopups}
                    name={'avatar'}
                    title={'Обновить аватар'}
                    children={(
