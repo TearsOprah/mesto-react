@@ -51,8 +51,6 @@ export default function EditProfilePopup(props) {
     if (nameError || descriptionError) {
       nameErrorRef.current.textContent = nameError;
       descriptionErrorRef.current.textContent = descriptionError;
-      nameErrorRef.current.classList.toggle('popup__error_visible', nameError !== '');
-      descriptionErrorRef.current.classList.toggle('popup__error_visible', descriptionError !== '');
       return
     }
 
@@ -98,12 +96,12 @@ export default function EditProfilePopup(props) {
                  maxLength="40"
                  placeholder="Введите имя"
                  required />
-          <span ref={nameErrorRef} id="nameInput-error" className="popup__error"></span>
+          <span ref={nameErrorRef} id="nameInput-error" className="popup__error popup__error_visible"></span>
         </div>
         <div className="popup__field-container">
           <input onChange={handleChangeDescription} value={description || ''} id="jobInput" className="popup__field" type="text" name="job" minLength="2" maxLength="200"
                  placeholder="Введите профессию" required />
-          <span ref={descriptionErrorRef} id="jobInput-error" className="popup__error"></span>
+          <span ref={descriptionErrorRef} id="jobInput-error" className="popup__error popup__error_visible"></span>
         </div>
       </>
 
