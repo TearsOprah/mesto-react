@@ -73,6 +73,17 @@ function App() {
     setSelectedCard({})
   }
 
+  function handleUpdateUser(data) {
+    api.setUserData(data)
+      .then((userInfo) => {
+        setCurrentUser(userInfo);
+        closeAllPopups();
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   const [selectedCard, setSelectedCard] = useState({})
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
@@ -101,7 +112,7 @@ function App() {
 
         <Footer />
 
-        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
+        <EditProfilePopup onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
 
         <PopupWithForm isOpen={isAddPlacePopupOpen}
                        onClose={closeAllPopups}

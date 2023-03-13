@@ -33,13 +33,13 @@ class Api {
       })
   }
 
-  setUserData({name, job}) {
+  setUserData({name, about}) {
     return fetch('https://mesto.nomoreparties.co/v1/cohort-59/users/me', {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
         name,
-        about: job
+        about
       })
     })
       .then(res => this._getResponseData(res))
