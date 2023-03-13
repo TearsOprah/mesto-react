@@ -11,6 +11,17 @@ function App() {
 
   const [cards, setCards] = useState([])
 
+  function handleCardDelete(card) {
+    const cardId = card._id;
+    api.deleteCard(cardId)
+      .then(() => {
+        setCards((state) => state.filter((c) => c._id !== cardId))
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some(i => i._id === currentUser._id);
@@ -19,7 +30,10 @@ function App() {
     api.toggleLike(card._id, isLiked)
       .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    });
+    })
+      .catch(err => {
+        console.log(err)
+      });
   }
 
   const [currentUser, setCurrentUser] = useState({})
@@ -78,6 +92,7 @@ function App() {
               onEditAvatar={handleEditAvatarClick}
               onCardClick={handleCardClick}
               onCardLike={handleCardLike}
+              onCardDelete={handleCardDelete}
               cards={cards}
               setCards={setCards}
         />

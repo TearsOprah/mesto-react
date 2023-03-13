@@ -14,6 +14,10 @@ export default function Card(props) {
     `element__like ${isLiked && 'element__like_active'}`
   );
 
+  function handleCardDelete() {
+    props.onCardDelete(props.card)
+  }
+
   function handleCardLike() {
     props.onCardLike(props.card)
   }
@@ -32,7 +36,7 @@ export default function Card(props) {
           <p className="element__likes">{props.card.likes.length}</p>
         </div>
       </div>
-      {isOwn && <button className="element__delete" type="button"></button>}
+      {isOwn && <button className="element__delete" type="button" onClick={handleCardDelete}></button>}
     </li>
   )
 }
