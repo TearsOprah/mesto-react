@@ -1,12 +1,24 @@
-
+import api from "../utils/api";
 import Header from "./Header";
 import Footer from "./Footer";
 import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 function App() {
+
+  const [currentUser, setCurrentUser] = useState('')
+  useEffect(() => {
+    api.getUserData()
+      .then(res => {
+        console.log(res)
+        setCurrentUser(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true)
