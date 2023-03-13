@@ -109,6 +109,17 @@ function App() {
       })
   }
 
+  function handleAddPlaceSubmit(data) {
+    api.addNewCard(data)
+      .then(newCard => {
+        setCards((cards) => [newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
   const [selectedCard, setSelectedCard] = useState({})
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
@@ -138,7 +149,7 @@ function App() {
 
         <EditProfilePopup onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
 
-        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
+        <AddPlacePopup onAddPlace={handleAddPlaceSubmit}  isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
 
         <PopupWithForm isOpen={''}
                        onClose={closeAllPopups}
