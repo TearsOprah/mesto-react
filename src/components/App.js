@@ -7,6 +7,7 @@ import ImagePopup from "./ImagePopup";
 import {useEffect, useState} from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 
 function App() {
 
@@ -146,21 +147,7 @@ function App() {
 
         </PopupWithForm>
 
-
-        <PopupWithForm  isOpen={isEditAvatarPopupOpen}
-                        onClose={closeAllPopups}
-                        name={'avatar'}
-                        title={'Обновить аватар'}
-                        buttonText={'Сохранить'}>
-
-          <div className="popup__field-container">
-            <input id="avatarInput" className="popup__field" type="url" name="avatar" maxLength="1000"
-                   placeholder="Ссылка на картинку" required />
-            <span id="avatarInput-error" className="popup__error popup__error_visible"></span>
-          </div>
-
-        </PopupWithForm>
-
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
 
         <ImagePopup card={selectedCard}
                     onClose={closeAllPopups}
