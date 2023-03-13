@@ -1,4 +1,10 @@
+import React, {useContext} from "react";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 export default function Card(props) {
+
+  const currentUser = React.useContext(CurrentUserContext)
+
+  const isOwn = props.card.owner._id === currentUser._id;
 
   function handleCardClick() {
     props.onCardClick(props.card)
@@ -14,7 +20,7 @@ export default function Card(props) {
           <p className="element__likes">{props.card.likes.length}</p>
         </div>
       </div>
-      <button className="element__delete" type="button"></button>
+      {isOwn && <button className="element__delete" type="button"></button>}
     </li>
   )
 }
