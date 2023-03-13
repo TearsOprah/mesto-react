@@ -8,6 +8,7 @@ import {useEffect, useState} from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
 
@@ -137,27 +138,7 @@ function App() {
 
         <EditProfilePopup onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
 
-        <PopupWithForm isOpen={isAddPlacePopupOpen}
-                       onClose={closeAllPopups}
-                       name={'add'}
-                       title={'Новое место'}
-                       buttonText={'Создать'}>
-
-          <>
-            <div className="popup__field-container">
-              <input id="cardNameInput" className="popup__field" type="text" name="name" minLength="2" maxLength="30"
-                     placeholder="Название" required />
-              <span id="cardNameInput-error" className="popup__error popup__error_visible"></span>
-            </div>
-            <div className="popup__field-container">
-              <input id="linkInput" className="popup__field" type="url" name="link" maxLength="1000"
-                     placeholder="Ссылка на картинку" required />
-              <span id="linkInput-error" className="popup__error popup__error_visible"></span>
-            </div>
-          </>
-
-        </PopupWithForm>
-
+        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
 
         <PopupWithForm isOpen={''}
                        onClose={closeAllPopups}
