@@ -81,6 +81,14 @@ class Api {
       .then(res => this._getResponseData(res))
   }
 
+  toggleLike(cardId, isLiked) {
+    if (isLiked) {
+      return this.deleteLike(cardId)
+    } else {
+      return this.setLike(cardId)
+    }
+  }
+
   updateAvatar({ avatar }) {
     return fetch('https://mesto.nomoreparties.co/v1/cohort-59/users/me/avatar', {
       method: 'PATCH',

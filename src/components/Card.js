@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 export default function Card(props) {
 
@@ -14,6 +14,9 @@ export default function Card(props) {
     `element__like ${isLiked && 'element__like_active'}`
   );
 
+  function handleCardLike() {
+    props.onCardLike(props.card)
+  }
 
   function handleCardClick() {
     props.onCardClick(props.card)
@@ -25,7 +28,7 @@ export default function Card(props) {
       <div className="element__info">
         <h2 className="element__title">{props.card.name}</h2>
         <div>
-          <button className={cardLikeButtonClassName} type="button"></button>
+          <button className={cardLikeButtonClassName} type="button" onClick={handleCardLike}></button>
           <p className="element__likes">{props.card.likes.length}</p>
         </div>
       </div>
