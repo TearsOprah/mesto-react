@@ -74,6 +74,18 @@ function App() {
     setSelectedCard({})
   }
 
+  // получаем список карточек
+  useEffect(() => {
+    api.getInitialCards()
+      .then(res => {
+        setCards(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
+
+
   function handleUpdateUser(data) {
     api.setUserData(data)
       .then((userInfo) => {
@@ -118,7 +130,6 @@ function App() {
               onCardLike={handleCardLike}
               onCardDelete={handleCardDelete}
               cards={cards}
-              setCards={setCards}
         />
 
 

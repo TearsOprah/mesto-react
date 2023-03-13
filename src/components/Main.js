@@ -1,5 +1,3 @@
-import {useEffect} from "react";
-import api from "../utils/api";
 import Card from "./Card";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import React from "react";
@@ -7,17 +5,6 @@ import React from "react";
 export default function Main(props) {
 
   const currentUser = React.useContext(CurrentUserContext)
-
-  useEffect(() => {
-    api.getInitialCards()
-      .then(res => {
-        props.setCards(res)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }, [])
-
 
   return (
     <main className="content">
