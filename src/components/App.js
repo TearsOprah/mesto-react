@@ -85,6 +85,17 @@ function App() {
       })
   }
 
+  function handleUpdateAvatar({ avatar }) {
+    api.updateAvatar({ avatar })
+      .then((userInfo) => {
+        setCurrentUser(userInfo);
+        closeAllPopups();
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   const [selectedCard, setSelectedCard] = useState({})
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
@@ -147,7 +158,7 @@ function App() {
 
         </PopupWithForm>
 
-        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
+        <EditAvatarPopup onUpdateAvatar={handleUpdateAvatar} isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
 
         <ImagePopup card={selectedCard}
                     onClose={closeAllPopups}
