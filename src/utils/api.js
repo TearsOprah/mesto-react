@@ -14,7 +14,7 @@ class Api {
 
   // Загрузка информации о пользователе с сервера
   getUserData() {
-    return fetch('https://nomoreparties.co/v1/cohort-59/users/me', {
+    return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers
     })
       .then(res => this._getResponseData(res))
@@ -24,7 +24,7 @@ class Api {
   }
 
   getInitialCards() {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards', {
+    return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers
     })
       .then(res => this._getResponseData(res))
@@ -34,7 +34,7 @@ class Api {
   }
 
   setUserData({name, about}) {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-59/users/me', {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -46,7 +46,7 @@ class Api {
   }
 
   addNewCard({name, link}) {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards', {
+    return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
@@ -58,7 +58,7 @@ class Api {
   }
 
   deleteCard(cardId) {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards/' + cardId, {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
       headers: this._headers
     })
@@ -66,7 +66,7 @@ class Api {
   }
 
   setLike(cardId) {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards/' + cardId + '/likes', {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: 'PUT',
       headers: this._headers
     })
@@ -74,7 +74,7 @@ class Api {
   }
 
   deleteLike(cardId) {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards/' + cardId + '/likes', {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: 'DELETE',
       headers: this._headers
     })
@@ -90,7 +90,7 @@ class Api {
   }
 
   updateAvatar({ avatar }) {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-59/users/me/avatar', {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
