@@ -10,15 +10,6 @@ export default function AddPlacePopup(props) {
   const [nameError, setNameError] = useState('');
   const [linkError, setLinkError] = useState('');
 
-  // useEffect(() => {
-  //   if (props.isOpen) {
-  //     // очищаем поля
-  //     nameRef.current.value = ''
-  //     linkRef.current.value = ''
-  //     nameErrorRef.current.textContent = '';
-  //     linkErrorRef.current.textContent = '';
-  //   }
-  // }, [props.isOpen])
 
   function handleChangeName(ev) {
     setName(ev.target.value);
@@ -83,7 +74,7 @@ export default function AddPlacePopup(props) {
                    onClose={handleClose}
                    name={'add'}
                    title={'Новое место'}
-                   buttonText={'Создать'}
+                   buttonText={props.isLoading? 'Сохранение...' : 'Создать'}
                    onSubmit={handleSubmit}>
 
 

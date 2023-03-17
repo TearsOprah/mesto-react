@@ -14,6 +14,7 @@ function App() {
 
   const [cards, setCards] = useState([])
 
+
   function handleCardDelete(card) {
     const cardId = card._id;
     api.deleteCard(cardId)
@@ -75,6 +76,7 @@ function App() {
     setSelectedCard({})
   }
 
+
   // получаем список карточек
   useEffect(() => {
     api.getInitialCards()
@@ -87,7 +89,10 @@ function App() {
   }, [])
 
 
+  const [isLoading, setIsLoading] = useState(false);
+
   function handleUpdateUser(data) {
+    setIsLoading(true)
     api.setUserData(data)
       .then((userInfo) => {
         setCurrentUser(userInfo);
@@ -96,9 +101,13 @@ function App() {
       .catch(err => {
         console.log(err)
       })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   function handleUpdateAvatar({ avatar }) {
+    setIsLoading(true)
     api.updateAvatar({ avatar })
       .then((userInfo) => {
         setCurrentUser(userInfo);
@@ -107,9 +116,13 @@ function App() {
       .catch(err => {
         console.log(err)
       })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   function handleAddPlaceSubmit(data) {
+    setIsLoading(true)
     api.addNewCard(data)
       .then(newCard => {
         setCards((cards) => [newCard, ...cards]);
@@ -118,6 +131,9 @@ function App() {
       .catch(err => {
         console.log(err);
       })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   const [selectedCard, setSelectedCard] = useState({})
@@ -125,6 +141,24 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false)
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false)
+
+  // переменная для слежения за всеми состояниями попапов
+  const isOpen = isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || selectedCard.link
+
+  useEffect(() => {
+    function closeByEscape(evt) {
+      if(evt.key === 'Escape') {
+        closeAllPopups();
+      }
+    }
+    if(isOpen) { // навешиваем только при открытии
+      document.addEventListener('keydown', closeByEscape);
+      return () => {
+        document.removeEventListener('keydown', closeByEscape);
+      }
+    }
+  }, [isOpen])
+
 
   return (
 
@@ -147,9 +181,9 @@ function App() {
 
         <Footer />
 
-        <EditProfilePopup onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
+        <EditProfilePopup isLoading={isLoading} onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
 
-        <AddPlacePopup onAddPlace={handleAddPlaceSubmit}  isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
+        <AddPlacePopup isLoading={isLoading} onAddPlace={handleAddPlaceSubmit}  isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
 
         <PopupWithForm isOpen={''}
                        onClose={closeAllPopups}
@@ -161,7 +195,7 @@ function App() {
 
         </PopupWithForm>
 
-        <EditAvatarPopup onUpdateAvatar={handleUpdateAvatar} isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
+        <EditAvatarPopup isLoading={isLoading} onUpdateAvatar={handleUpdateAvatar} isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
 
         <ImagePopup card={selectedCard}
                     onClose={closeAllPopups}

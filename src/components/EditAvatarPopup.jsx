@@ -34,7 +34,7 @@ export default function EditAvatarPopup(props) {
                     onClose={handleClose}
                     name={'avatar'}
                     title={'Обновить аватар'}
-                    buttonText={'Сохранить'}
+                    buttonText={props.isLoading? 'Сохранение...' : 'Сохранить'}
                     onSubmit={handleSubmit}>
 
       <div className="popup__field-container">

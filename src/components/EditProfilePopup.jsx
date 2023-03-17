@@ -80,7 +80,7 @@ export default function EditProfilePopup(props) {
                    onClose={handleClose}
                    name={'edit'}
                    title={'Редактировать профиль'}
-                   buttonText={'Сохранить'}
+                   buttonText={props.isLoading? 'Сохранение...' : 'Сохранить'}
                    onSubmit={handleSubmit}>
 
 
