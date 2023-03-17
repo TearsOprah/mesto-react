@@ -15,7 +15,7 @@ export default function EditAvatarPopup(props) {
         avatar: avatarRef.current.value /* Значение инпута, полученное с помощью рефа */,
       });
       // скидываем вписанное значение
-      avatarRef.current.value = ''
+      // avatarRef.current.value = ''
     } catch (err) {
       avatarErrorRef.current.textContent = 'Введите корректный URL';
     }

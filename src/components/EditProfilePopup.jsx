@@ -19,7 +19,7 @@ export default function EditProfilePopup(props) {
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, props.isOpen]);
 
   function handleChangeName(event) {
     setName(event.target.value);
@@ -71,8 +71,8 @@ export default function EditProfilePopup(props) {
     nameErrorRef.current.textContent = '';
     descriptionErrorRef.current.textContent = '';
     // чтобы после закрытия попапа с ошибкой, в поле вернулось старое имя
-    setName(currentUser.name);
-    setDescription(currentUser.about)
+    // setName(currentUser.name);
+    // setDescription(currentUser.about)
   }
 
   return (
@@ -84,26 +84,26 @@ export default function EditProfilePopup(props) {
                    onSubmit={handleSubmit}>
 
 
-      <>
-        <div className="popup__field-container">
-          <input onChange={handleChangeName}
-                 value={name || ''}
-                 id="nameInput"
-                 className="popup__field"
-                 type="text"
-                 name="name"
-                 minLength="2"
-                 maxLength="40"
-                 placeholder="Введите имя"
-                 required />
-          <span ref={nameErrorRef} id="nameInput-error" className="popup__error popup__error_visible"></span>
-        </div>
-        <div className="popup__field-container">
-          <input onChange={handleChangeDescription} value={description || ''} id="jobInput" className="popup__field" type="text" name="job" minLength="2" maxLength="200"
+
+      <div className="popup__field-container">
+        <input onChange={handleChangeName}
+               value={name || ''}
+               id="nameInput"
+               className="popup__field"
+               type="text"
+               name="name"
+               minLength="2"
+               maxLength="40"
+               placeholder="Введите имя"
+               required />
+        <span ref={nameErrorRef} id="nameInput-error" className="popup__error popup__error_visible"></span>
+      </div>
+      <div className="popup__field-container">
+        <input onChange={handleChangeDescription} value={description || ''} id="jobInput" className="popup__field" type="text" name="job" minLength="2" maxLength="200"
                  placeholder="Введите профессию" required />
-          <span ref={descriptionErrorRef} id="jobInput-error" className="popup__error popup__error_visible"></span>
-        </div>
-      </>
+        <span ref={descriptionErrorRef} id="jobInput-error" className="popup__error popup__error_visible"></span>
+      </div>
+
 
     </PopupWithForm>
   )
